@@ -25,6 +25,7 @@ class Menu:
 
             pygame.display.flip()
 
+            #pegar evento
             for evento in pygame.event.get():
                 if evento.type == pygame.QUIT:
                     pygame.quit()

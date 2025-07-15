@@ -15,6 +15,7 @@ class Game:
         self.bg_image = pygame.transform.scale(self.bg_image, (800, 600))
         self.bg_x = 0
 
+        #incorporando o som
         self.screen = screen
         self.clock = pygame.time.Clock()
         self.jump_sound = pygame.mixer.Sound("./assets/jump.mp3")
