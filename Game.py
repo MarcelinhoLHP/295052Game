@@ -11,6 +11,10 @@ FPS = 60
 
 class Game:
     def __init__(self, screen):
+        self.bg_image = pygame.image.load("./assets/fundo.jpg").convert()
+        self.bg_image = pygame.transform.scale(self.bg_image, (800, 600))
+        self.bg_x = 0
+
         self.screen = screen
         self.clock = pygame.time.Clock()
         self.jump_sound = pygame.mixer.Sound("./assets/jump.mp3")
@@ -35,10 +39,27 @@ class Game:
 
         self.font = pygame.font.SysFont("arial", 30)
 
+        # Atualiza posição do fundo
+        self.bg_x -= self.velocidade // 2  # velocidade ajustável
+
+
     def run(self):
         while True:
             self.clock.tick(FPS)
             self.tempo += 1
+            # Atualiza posição do fundo
+            self.bg_x -= self.velocidade // 2  # ajustável
+
+            # Reinicia loop quando uma imagem sair da tela
+            if self.bg_x <= -800:
+                self.bg_x = 0
+
+            # Desenha o fundo duas vezes, lado a lado
+            self.screen.blit(self.bg_image, (self.bg_x, 0))
+            self.screen.blit(self.bg_image, (self.bg_x + 800, 0))
+
+            # Desenha os sprites
+            self.todas_sprites.draw(self.screen)
 
             if self.tempo % 300 == 0:
                 self.velocidade += 1
